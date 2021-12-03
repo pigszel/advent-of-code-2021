@@ -44,7 +44,6 @@
 
       inputs.forEach((command) => {
         let [direction, value] = command.split(" ");
-        value = Number(value);
 
         switch (direction) {
           case "forward":
@@ -65,6 +64,36 @@
         `The (yellow) submarine's horizontal position is at ${submarine.x}, while the depth is at ${submarine.y}.`
       );
       console.log(`Theirs multiplier is ${submarine.x * submarine.y}`);
+
+      // === PART TWO ===
+      // Method #1
+      const submarine2 = {
+        x: 0,
+        y: 0,
+        aim: 0,
+      };
+
+      inputs.forEach((command) => {
+        let [direction, value] = command.split(" ");
+
+        if (direction === "forward") {
+          submarine2.x += +value;
+          submarine2.y += submarine2.aim * +value;
+        }
+
+        if (direction === "down") {
+          submarine2.aim += +value;
+        }
+
+        if (direction === "up") {
+          submarine2.aim -= +value;
+        }
+      });
+
+      console.log(
+        `The new submarine has is at the following coordinates: horizontal position: ${submarine2.x}, depths: ${submarine2.y}; aim: ${submarine2.aim}.`
+      );
+      console.log(`Theirs multiplier is ${submarine2.x * submarine2.y}`);
     </script>
   </body>
 </html>
