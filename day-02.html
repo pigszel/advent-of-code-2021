@@ -1,0 +1,38 @@
+<html>
+  <head>
+    <title>Day 02</title>
+  </head>
+  <body>
+    <h1>Day 02</h1>
+    <script type="module">
+      import { DAY_02 } from "./constants/inputs.js";
+      const inputs = [...DAY_02];
+
+      // === PART ONE ===
+      let x = 0;
+      let y = 0;
+      inputs.forEach((input) => {
+        const [direction, value] = input.split(" ");
+
+        switch (direction) {
+          case "forward":
+            x = x + Number(value);
+            break;
+          case "down":
+            y = y + Number(value);
+            break;
+          case "up":
+            y = y - Number(value);
+            break;
+          default:
+            return;
+        }
+      });
+
+      console.log(
+        `Horizontal position is at ${x}, while the depth is at ${y}.`
+      );
+      console.log(`Theirs multiplier is ${x * y}`);
+    </script>
+  </body>
+</html>
