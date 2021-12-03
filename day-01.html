@@ -1,0 +1,144 @@
+<html>
+  <head>
+    <title>Day 01</title>
+  </head>
+  <body>
+    <h1>Day 01</h1>
+    <script type="module">
+      import { DAY_01 } from "./constants/inputs.js";
+      const inputs = [...DAY_01];
+
+      // === PART ONE ===
+      // Method #1
+      const measurements = [];
+
+      inputs.forEach((input, index) => {
+        if (!inputs[index - 1]) {
+          return null;
+        }
+
+        if (input > inputs[index - 1]) {
+          measurements.push("increase");
+        } else {
+          measurements.push("decrease");
+        }
+      });
+
+      const countIncreases = measurements.filter((m) => m === "increase"); // 1752
+      const countDecreases = measurements.filter((m) => m === "decrease"); // 247
+
+      // Method #2
+      const increases = inputs.reduce((count, input, index) => {
+        if (input > inputs[index - 1]) {
+          count++;
+          return count;
+        }
+
+        return count;
+      }, 0);
+
+      console.log(`Count of increases: ${increases}`);
+
+      // === PART 2 ===
+      const smallInputs = [
+        100, 101, 105, 106, 103, 104, 106, 108, 112, 123, 125, 149, 158, 147,
+        150, 153, 156, 166, 171, 172, 174, 186, 193, 198, 203, 217, 220, 235,
+        239, 242, 245, 243, 237, 238, 246, 247, 238, 242, 254, 256, 263,
+      ];
+      const letters = [
+        "A",
+        "B",
+        "C",
+        "D",
+        "E",
+        "F",
+        "G",
+        "H",
+        "I",
+        "J",
+        "K",
+        "L",
+        "M",
+        "N",
+      ];
+
+      /*
+  100 A
+  101 A B
+  105 A B C
+  106   B C D
+  103 E   C D
+  104 E F   D
+  106 E F G
+  108   F G H
+  112 I   G H
+  123 I J   H
+  125 I J K
+  149   J K L
+  158 M   K L
+  147 M N   L
+  150 M N O
+  153   N O P
+  156 Q   O P
+  166 Q R   P
+  171 Q R S
+  172   R S T
+  174 U   S T
+  186 U V   T
+  193 U V W
+  198   V W X
+  203 Y   W X
+  217 Y Z   X
+  220 Y Z A
+  235   Z A B
+  239 C   A B
+  242 C D
+  245 C D E
+  243   D E F
+  */
+
+      // A -- 100 101 105 = 306 N
+      // B -- 101 105 106 = 312 D
+      // C -- 105 106 103 = 314 D
+      // D -- 106 103 104 = 313 I
+      // E -- 103 104 106 = 313 N
+      // F -- 104 106 108 = 318 D
+      // G -- 106 108 112 = 326 D
+      // H -- 108 112 123 = 343 D
+      // I -- 112 123 125 =
+      // J -- 123 125 149 =
+      // K -- 125 149 158 =
+      // L --
+      // M --
+      // N --
+
+      const p2Measurements = [];
+      inputs.forEach((input, index) => {
+        if (index < 3) return;
+
+        let sumCurrent = 0;
+        let sumPrev = 0;
+
+        for (let i = index; i > index - 3; i--) {
+          sumCurrent = sumCurrent + inputs[i];
+        }
+
+        for (let j = index - 1; j > index - 4; j--) {
+          sumPrev = sumPrev + inputs[j];
+        }
+
+        if (sumCurrent > sumPrev) {
+          p2Measurements.push("increase");
+        } else {
+          p2Measurements.push("decrease");
+        }
+      });
+
+      const p2CountIncreases = p2Measurements.filter((m) => m === "increase");
+      const p2CountDecreases = p2Measurements.filter((m) => m === "decrease");
+
+      console.log("p2CountIncreases", p2CountIncreases.length);
+      console.log("p2CountDecreases", p2CountDecreases.length);
+    </script>
+  </body>
+</html>
