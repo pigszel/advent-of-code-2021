@@ -9,12 +9,12 @@
       const inputs = [...DAY_02];
 
       // === PART ONE ===
+      // Method #1
       let x = 0;
       let y = 0;
       inputs.forEach((input) => {
         let [direction, value] = input.split(" ");
         value = Number(value);
-        console.log(typeof value);
 
         switch (direction) {
           case "forward":
@@ -35,6 +35,36 @@
         `Horizontal position is at ${x}, while the depth is at ${y}.`
       );
       console.log(`Theirs multiplier is ${x * y}`);
+
+      // Method #2 (from legas)
+      const submarine = {
+        x: 0,
+        y: 0,
+      };
+
+      inputs.forEach((command) => {
+        let [direction, value] = command.split(" ");
+        value = Number(value);
+
+        switch (direction) {
+          case "forward":
+            submarine.x += +value;
+            break;
+          case "down":
+            submarine.y += +value;
+            break;
+          case "up":
+            submarine.y -= +value;
+            break;
+          default:
+            return;
+        }
+      });
+
+      console.log(
+        `The (yellow) submarine's horizontal position is at ${submarine.x}, while the depth is at ${submarine.y}.`
+      );
+      console.log(`Theirs multiplier is ${submarine.x * submarine.y}`);
     </script>
   </body>
 </html>
