@@ -12,17 +12,19 @@
       let x = 0;
       let y = 0;
       inputs.forEach((input) => {
-        const [direction, value] = input.split(" ");
+        let [direction, value] = input.split(" ");
+        value = Number(value);
+        console.log(typeof value);
 
         switch (direction) {
           case "forward":
-            x = x + Number(value);
+            x = x + value;
             break;
           case "down":
-            y = y + Number(value);
+            y = y + value;
             break;
           case "up":
-            y = y - Number(value);
+            y = y - value;
             break;
           default:
             return;
